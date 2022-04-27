@@ -17,12 +17,13 @@ from django.urls import include, path
 from django.contrib import admin
 from rest_framework import routers
 from employee import views as user_view
-from restaurant.views import RestaurantViewSet, MenuViewSet, CurrentDayMenuViewSet
+from restaurant.views import RestaurantViewSet, MenuViewSet, ItemViewSet, CurrentDayMenuViewSet
 
 router = routers.DefaultRouter()
 router.register('users', user_view.UserViewSet)
 router.register('restaurants', RestaurantViewSet)
-router.register('menus', MenuViewSet)
+router.register('menus', MenuViewSet, basename="menus")
+router.register('items', ItemViewSet)
 router.register('current-day-menus', CurrentDayMenuViewSet)
 
 # Wire up our API using automatic URL routing.

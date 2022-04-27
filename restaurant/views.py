@@ -1,7 +1,7 @@
 from datetime import datetime
-from restaurant.models import Restaurant, Menu
+from restaurant.models import Item, Restaurant, Menu
 from rest_framework import viewsets
-from .serializers import RestaurantSerializer, MenuSerializer
+from .serializers import CurrentDayMenuSerializer, ItemSerializer, RestaurantSerializer, MenuSerializer
 
 
 class RestaurantViewSet(viewsets.ModelViewSet):
@@ -20,10 +20,17 @@ class MenuViewSet(viewsets.ModelViewSet):
     serializer_class = MenuSerializer
 
 
+class ItemViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+
+
 class CurrentDayMenuViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    queryset = Menu.objects.all().filter(created_at__date=datetime.now().date())
-    serializer_class = MenuSerializer
-
+    queryset = Menu.objects.filter(created_at__date=datetime.now().date())
+    serializer_class = CurrentDayMenuSerializer

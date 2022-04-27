@@ -27,3 +27,8 @@ class Menu(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     uploaded_by = models.CharField(max_length=50, null=True, blank=True)
     votes = models.IntegerField(default=0)
+
+
+class Item(models.Model):
+    name = models.CharField(max_length=255, null=True, blank=True)
+    menu = models.ManyToManyField(Menu)
